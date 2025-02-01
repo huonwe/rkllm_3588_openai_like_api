@@ -1,7 +1,10 @@
-# 介绍
+# rkllm openai like api server
+[English](https://github.com/huonwe/rkllm_openai_like_api/blob/main/README.en.md)
+
+## 介绍
 兼容OpenAI API格式的rkllm server代码
 
-# 使用
+## 使用
 ```bash
 git clone https://github.com/huonwe/rkllm_openai_like_api.git
 cd rkllm_openai_like_api
@@ -30,5 +33,5 @@ uv run server.py
 uv run client.py
 ```
 
-# 模型
+## 模型
 这里有deepseek-r1的1.5b蒸馏版的rkllm模型，如果需要可自行[下载](https://drive.google.com/drive/folders/1I4XHZeNcDQgm1A2BTzatmUWdNHIQSsMJ?usp=drive_link)
