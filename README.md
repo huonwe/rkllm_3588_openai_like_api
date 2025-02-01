@@ -3,8 +3,8 @@
 
 # 使用
 ```bash
-git clone https://github.com/huonwe/rkllm_3588_openai_like_api.git
-cd rkllm_3588_openai_like_api
+git clone https://github.com/huonwe/rkllm_openai_like_api.git
+cd rkllm_openai_like_api
 ```
 添加需要用到的动态库:
 ```bash
