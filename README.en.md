@@ -44,4 +44,4 @@ uv run client.py
 
 # Model
 
-Here is the 1.5b distilled version of the deepseek-r1 rkllm model, you can download it if needed: [download](https://drive.google.com/drive/folders/1I4XHZeNcDQgm1A2BTzatmUWdNHIQSsMJ?usp=drive_link)
+Here is the 1.5b distilled version of the deepseek-r1 rkllm model, you can download it if needed: [download](https://drive.google.com/drive/folders/1I4XHZeNcDQgm1A2BTzatmUWdNHIQSsMJ?usp=sharing)
