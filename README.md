@@ -18,8 +18,8 @@ uv sync
 ```bash
 uv run server.py
 ```
-    - 默认情况下，参数为rk3588，模型路径为models/deepseek-r1-1.5b-w8a8.rkllm
-    - 你可以手动指定参数，如uv run server.py --rkllm_model_path=path/to/model.rkllm ----target_platform=rk3576
+- 默认情况下，参数为rk3588，模型路径为models/deepseek-r1-1.5b-w8a8.rkllm
+- 你可以手动指定参数，如uv run server.py --rkllm_model_path=path/to/model.rkllm ----target_platform=rk3576
 
 你可以用client.py测试:
 ```bash
