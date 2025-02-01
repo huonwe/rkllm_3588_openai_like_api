@@ -25,8 +25,10 @@ uv sync
 ```bash
 uv run server.py
 ```
-- 默认情况下，参数为rk3588，模型路径为models/deepseek-r1-1.5b-w8a8.rkllm
-- 你可以手动指定参数，如uv run server.py --rkllm_model_path=path/to/model.rkllm ----target_platform=rk3576
+- 默认情况下，平台设置为rk3588，模型路径为models/deepseek-r1-1.5b-w8a8.rkllm，监听端口为8080
+- 你可以手动指定参数，如uv run server.py --rkllm_model_path=path/to/model.rkllm ----target_platform=rk3588 --port=8080
+
+之后，你可以通过`http://your.ip:8080/rkllm_chat/v1`来连接到本服务。由于只实现了`/v1/chat/completions`, 所以并不是所有功能都可以正常使用。
 
 你可以用client.py测试:
 ```bash

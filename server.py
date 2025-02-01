@@ -302,6 +302,8 @@ if __name__ == "__main__":
     parser.add_argument('--target_platform', type=str, default="rk3588", help='Target platform: e.g., rk3588/rk3576;')
     parser.add_argument('--lora_model_path', type=str, help='Absolute path of the lora_model on the Linux board;')
     parser.add_argument('--prompt_cache_path', type=str, help='Absolute path of the prompt_cache file on the Linux board;')
+    parser.add_argument('--port', type=int, default=8080, help='Port that the flask server will listen.')
+
     args = parser.parse_args()
 
     if not os.path.exists(args.rkllm_model_path):
@@ -447,7 +449,7 @@ if __name__ == "__main__":
         
     # Start the Flask application.
     # app.run(host='0.0.0.0', port=8080)
-    app.run(host='0.0.0.0', port=8080, threaded=True, debug=False)
+    app.run(host='0.0.0.0', port=args.port, threaded=True, debug=False)
 
     print("====================")
     print("RKLLM model inference completed, releasing RKLLM model resources...")

@@ -36,6 +36,9 @@ uv run server.py
 - By default, the parameters are rk3588, and the model path is models/deepseek-r1-1.5b-w8a8.rkllm.
 - You can manually specify parameters, such as uv run server.py --rkllm_model_path=path/to/model.rkllm ----target_platform=rk3576
 
+Then, you can access this server through `http://your.ip:8080/rkllm_chat/v1`.
+Please note that the server only implemented `/v1/chat/completions`, so not all of the functions can work properly
+
 You can use client.py to test:
 
 ```bash
