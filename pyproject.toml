@@ -1,0 +1,13 @@
+[project]
+name = "rkllm-3588-openai-like-api"
+version = "0.1.0"
+description = "兼容OpenAI API格式的server程序"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "flask>=3.1.0",
+    "flask-cors>=5.0.0",
+    "requests>=2.32.3",
+    "rknn-toolkit-lite2>=2.3.0",
+    "transformers>=4.48.1",
+]
