@@ -345,6 +345,16 @@ if __name__ == "__main__":
     sys.stdout.flush()
     
 
+    @app.route("/rkllm_chat/v1/models", methods=['GET'])
+    @cross_origin()
+    def show_models():
+        info = json.dumps({"object": "list", "data": [{
+            "id": f"{args.rkllm_model_path}",
+            "object": "model",
+            "owned_by": "rkllm_server"
+        }]})
+        return Response(info, content_type="application/json")
+
     # Create a function to receive data sent by the user using a request
     @app.route('/rkllm_chat/v1/chat/completions', methods=['POST'])
     @cross_origin()
@@ -432,7 +442,7 @@ if __name__ == "__main__":
                         while not model_thread_finished:
                             while len(global_text) > 0:
                                 rkllm_output = global_text.pop(0)
-                                time.sleep(0.05)
+                                time.sleep(0.01)
 
                                 yield f"data: {json.dumps({'choices':[
                                     {'delta':{'content': rkllm_output}}]})}\n\n"
