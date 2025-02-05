@@ -35,5 +35,8 @@ uv run server.py
 uv run client.py
 ```
 
+## 注意事项
+不要使用rkllm本地运行的模型来进行自动生成标题、标签等任务。在进行此类任务时，用户将无法与模型聊天，因为受限于性能，同一时刻server只会处理一条对话。若当前存在对话未处理完成，则不会接受任何其他对话。
+
 ## 模型
 这里有deepseek-r1的1.5b蒸馏版的rkllm模型，如果需要可自行[下载](https://drive.google.com/drive/folders/1I4XHZeNcDQgm1A2BTzatmUWdNHIQSsMJ?usp=sharing)

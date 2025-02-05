@@ -1,8 +1,8 @@
-# Introduction
+## Introduction
 
 rkllm server code compatible with the OpenAI API format.
 
-# Usage
+## Usage
 
 ```bash
 git clone https://github.com/huonwe/rkllm_openai_like_api.git
@@ -45,6 +45,10 @@ You can use client.py to test:
 uv run client.py
 ```
 
-# Model
+## Notes
+
+Do not use the rkllm local running model to automatically generate titles, tags, or similar tasks. When performing such tasks, users will be unable to chat with the model because, due to performance limitations, the server can only process one conversation at a time. If there is an ongoing conversation that has not been completed, the server will not accept any other conversations.
+
+## Model
 
 Here is the 1.5b distilled version of the deepseek-r1 rkllm model, you can download it if needed: [download](https://drive.google.com/drive/folders/1I4XHZeNcDQgm1A2BTzatmUWdNHIQSsMJ?usp=sharing)
