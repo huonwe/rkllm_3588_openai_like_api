@@ -41,5 +41,10 @@ uv run client.py
 ## 更新记录
 - [x] 实现了/v1/models，现在无需手动添加模型ID.  --20250205
 - [x] 删除了对transformers的AutoTokenizer的依赖.  --20250211
+
 ## 模型
 这里有deepseek-r1的1.5b蒸馏版的rkllm模型，如果需要可自行[下载](https://drive.google.com/drive/folders/1I4XHZeNcDQgm1A2BTzatmUWdNHIQSsMJ?usp=sharing)
+
+## FAQ
+- Q: 503 Error
+    A: 看注意事项
