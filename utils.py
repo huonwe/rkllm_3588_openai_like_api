@@ -29,3 +29,29 @@ def apply_chat_template(messages):
     # 送给模型的对话记录中删除think标签内的内容
     sentence = think_content.sub('', sentence)
     return sentence
+
+
+def make_llm_response(llm_output: str) -> dict:
+    # Define the structure for the returned response.
+    rkllm_responses = {
+        "id": "rkllm_chat",
+        "object": "rkllm_chat",
+        "created": None,
+        "choices": [],
+        "usage": {
+        "prompt_tokens": None,
+        "completion_tokens": None,
+        "total_tokens": None
+        }
+    }
+    rkllm_responses["choices"].append(
+        {"index": 0,
+        "message": {
+            "role": "assistant",
+            "content": llm_output,
+        },
+        "logprobs": None,
+        "finish_reason": "stop"
+        }
+    )
+    return rkllm_responses

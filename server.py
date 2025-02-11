@@ -8,7 +8,7 @@ import argparse
 import json
 from flask import Flask, request, jsonify, Response
 from flask_cors import cross_origin
-from utils import apply_chat_template
+from utils import apply_chat_template, make_llm_response
 from rkllm import RKLLM, get_global_state, get_global_text, set_global_state, set_global_text
 
 app = Flask(__name__)
@@ -28,7 +28,8 @@ def receive_message():
 
     # If the server is in a blocking state, return a specific response.
     if is_blocking or get_global_state()==0:
-        return jsonify({'status': 'error', 'message': 'RKLLM_Server is busy! Maybe you can try again later.'}), 503
+        resp = make_llm_response("⚠ RKLLM_Server 正忙碌! 请稍后再尝试.")
+        return jsonify(resp), 200
     
     lock.acquire()
     try:
@@ -43,19 +44,6 @@ def receive_message():
             # global_state = -1
             set_global_text([])
             set_global_state(-1)
-
-            # Define the structure for the returned response.
-            rkllm_responses = {
-                "id": "rkllm_chat",
-                "object": "rkllm_chat",
-                "created": None,
-                "choices": [],
-                "usage": {
-                "prompt_tokens": None,
-                "completion_tokens": None,
-                "total_tokens": None
-                }
-            }
 
             # Process the received data here.
             # messages.insert(0,{'role':'system','content':'You are a helpful assistant.'})
@@ -81,16 +69,7 @@ def receive_message():
                     model_thread.join(timeout=0.005)
                     model_thread_finished = not model_thread.is_alive()
                 
-                rkllm_responses["choices"].append(
-                    {"index": 0,
-                    "message": {
-                        "role": "assistant",
-                        "content": rkllm_output,
-                    },
-                    "logprobs": None,
-                    "finish_reason": "stop"
-                    }
-                )
+                rkllm_responses = make_llm_response(rkllm_output)
                 return jsonify(rkllm_responses), 200
             else:
                 input_prompt = messages_formatted
