@@ -9,14 +9,15 @@ import argparse
 import json
 from flask import Flask, request, jsonify, Response
 from flask_cors import cross_origin
-from transformers import AutoTokenizer
+# from transformers import AutoTokenizer
+from utils import apply_chat_template
 
 app = Flask(__name__)
 
 PROMPT_TEXT_PREFIX = ""
 PROMPT_TEXT_POSTFIX = " <｜Assistant｜>"
 # 使用Tokenizer自动应用模板
-tokenizer = AutoTokenizer.from_pretrained("deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B")
+# tokenizer = AutoTokenizer.from_pretrained("deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B")
 
 # Set the dynamic library path
 rkllm_lib = ctypes.CDLL('lib/librkllmrt.so')
@@ -392,50 +393,44 @@ if __name__ == "__main__":
                     }
                 }
 
+                # Process the received data here.
+                # messages.insert(0,{'role':'system','content':'You are a helpful assistant.'})
+                messages = data['messages']
+                # tokenized = tokenizer.apply_chat_template(messages, tokenize=False)
+                messages_formatted = apply_chat_template(messages)
+                print("messages_formatted: ", messages_formatted)
                 if not "stream" in data.keys() or data["stream"] == False:
-                    # Process the received data here.
-                    messages = data['messages']
-                    # messages.insert(0,{'role':'system','content':'You are a helpful assistant.'})
-                    print("Received messages:", messages)
-                    tokenized = tokenizer.apply_chat_template(messages, tokenize=False)
-                    print("Tokenized:",tokenized)
-                    for index, message in enumerate(messages):
-                        input_prompt = message['content']
-                        rkllm_output = ""
-                        
-                        # Create a thread for model inference.
-                        model_thread = threading.Thread(target=rkllm_model.run, args=(input_prompt,))
-                        model_thread.start()
+                    input_prompt = messages_formatted
+                    rkllm_output = ""                        
+                    # Create a thread for model inference.
+                    model_thread = threading.Thread(target=rkllm_model.run, args=(input_prompt,))
+                    model_thread.start()
 
-                        # Wait for the model to finish running and periodically check the inference thread of the model.
-                        model_thread_finished = False
-                        while not model_thread_finished:
-                            while len(global_text) > 0:
-                                rkllm_output += global_text.pop(0)
-                                time.sleep(0.05)
+                    # Wait for the model to finish running and periodically check the inference thread of the model.
+                    model_thread_finished = False
+                    while not model_thread_finished:
+                        while len(global_text) > 0:
+                            rkllm_output += global_text.pop(0)
+                            time.sleep(0.05)
 
-                            model_thread.join(timeout=0.005)
-                            model_thread_finished = not model_thread.is_alive()
-                        
-                        rkllm_responses["choices"].append(
-                            {"index": index,
-                            "message": {
-                                "role": "assistant",
-                                "content": rkllm_output,
-                            },
-                            "logprobs": None,
-                            "finish_reason": "stop"
-                            }
-                        )
+                        model_thread.join(timeout=0.005)
+                        model_thread_finished = not model_thread.is_alive()
+                    
+                    rkllm_responses["choices"].append(
+                        {"index": 0,
+                        "message": {
+                            "role": "assistant",
+                            "content": rkllm_output,
+                        },
+                        "logprobs": None,
+                        "finish_reason": "stop"
+                        }
+                    )
                     return jsonify(rkllm_responses), 200
                 else:
-                    messages = data['messages']
-                    # print("Received messages:", messages)
-                    tokenized = tokenizer.apply_chat_template(messages, tokenize=False)
-                    print("Tokenized messages:",tokenized)
-                    # rkllm_output = ""
+                    input_prompt = messages_formatted
                     def generate():
-                        model_thread = threading.Thread(target=rkllm_model.run, args=(tokenized,))
+                        model_thread = threading.Thread(target=rkllm_model.run, args=(input_prompt,))
                         model_thread.start()
                         
                         model_thread_finished = False

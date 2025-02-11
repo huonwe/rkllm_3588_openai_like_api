@@ -9,5 +9,4 @@ dependencies = [
     "flask-cors>=5.0.0",
     "requests>=2.32.3",
     "rknn-toolkit-lite2>=2.3.0",
-    "transformers>=4.48.1",
 ]
