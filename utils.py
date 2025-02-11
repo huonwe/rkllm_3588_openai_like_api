@@ -4,6 +4,8 @@ def apply_chat_template(messages):
     """
     该格式只针对deepseek-r1-distill-qwen-1.5b进行过测试.
     如果使用的是其它模型，请自行修改此处逻辑.
+
+    You will need to modify this function if you use some other models except deepseek-r1-distill-qwen-1.5b.
     """
     begin_of_sentence = "<｜begin▁of▁sentence｜>"
     end_of_sentence = "<｜end▁of▁sentence｜>"
