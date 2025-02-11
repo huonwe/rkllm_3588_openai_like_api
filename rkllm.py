@@ -2,6 +2,7 @@ import ctypes
 import sys
 import os
 import time
+# from transformers import AutoTokenizer
 
 PROMPT_TEXT_PREFIX = ""
 PROMPT_TEXT_POSTFIX = " <｜Assistant｜>"

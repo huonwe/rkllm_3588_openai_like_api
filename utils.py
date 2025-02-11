@@ -26,6 +26,6 @@ def apply_chat_template(messages):
             sentence += msg['content']
             sentence += end_of_sentence
 
-        # 送给模型的对话记录中删除think标签内的内容
-        sentence = think_content.sub('', sentence)
+    # 送给模型的对话记录中删除think标签内的内容
+    sentence = think_content.sub('', sentence)
     return sentence

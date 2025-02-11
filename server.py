@@ -8,7 +8,6 @@ import argparse
 import json
 from flask import Flask, request, jsonify, Response
 from flask_cors import cross_origin
-# from transformers import AutoTokenizer
 from utils import apply_chat_template
 from rkllm import RKLLM, get_global_state, get_global_text, set_global_state, set_global_text
 
