@@ -1,13 +1,7 @@
 import ctypes
 import sys
 import os
-import subprocess
-import resource
-import threading
 import time
-import argparse
-import json
-
 
 PROMPT_TEXT_PREFIX = ""
 PROMPT_TEXT_POSTFIX = " <｜Assistant｜>"
