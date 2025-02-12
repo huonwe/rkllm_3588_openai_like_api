@@ -4,6 +4,10 @@
 ## 介绍
 兼容OpenAI API格式的rkllm server代码
 
+## Support Platform
+- RK3588 Series
+- RK3576 Series
+
 ## 使用
 ```bash
 git clone https://github.com/huonwe/rkllm_openai_like_api.git
@@ -44,7 +48,3 @@ uv run client.py
 
 ## 模型
 这里有deepseek-r1的1.5b蒸馏版的rkllm模型，如果需要可自行[下载](https://drive.google.com/drive/folders/1I4XHZeNcDQgm1A2BTzatmUWdNHIQSsMJ?usp=sharing)
-
-## FAQ
-- Q: 503 Error
-    A: 看注意事项
